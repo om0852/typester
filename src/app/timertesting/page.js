@@ -6,8 +6,7 @@ import Cookie from "js-cookie";
 // ... (import statements)
 
 export default function Page() {
-    const [bgColor, setbgColor] = useState("black");
-    const [color, setColor] = useState("white");
+    const [incorrect, setincorrect] = useState(0);
     const [paragraph, setParagraph] = useState("");
     const [translateValue, setTranslateValue] = useState(0);
     const [textArray, setTextArray] = useState(["Certainly! Could you please provide more details about the topic or context of the demo text you'd like me to write? This information will help me tailor the text to your specific needs."]);
@@ -21,20 +20,27 @@ export default function Page() {
 
         } else if (e.key === "Backspace") {
             console.log(e.key)
-            i--;
+            if (i > 0) {
+                i--;
+            }
             arr1[i].style.background = "antiquewhite";
         } else {
-            console.log(arr1[i].innerText, e.key)
-            if (arr1[i].innerText.trim() === e.key) {
+            console.log(i, arr1.length)
+            if (i < arr1.length) {
 
-            } else {
-                arr1[i].style.background = "red";
+                console.log(arr1[i].innerText, e.key)
+                if (arr1[i].innerText === e.key) {
+
+                } else {
+                    arr1[i].style.background = "red";
+                }
+                i++;
             }
-            i++;
         }
         setTranslateValue(i);
-    }
 
+
+    }
     function load() {
         window.addEventListener('keydown', checkData)
     }
@@ -42,13 +48,6 @@ export default function Page() {
     useEffect(() => {
         load()
         let para = document.getElementById("display")
-        if (Cookie.get("bgColor") === "black") {
-            setColor("white");
-            setbgColor("black");
-        } else {
-            setColor("black");
-            setbgColor("white");
-        }
 
         // Create an array of spans dynamically
         const spansArray = textArray[0].split('').map((char, index) => (
@@ -65,7 +64,7 @@ export default function Page() {
                 {/* ... (other components) */}
                 <div className="show-text">
                     <div className="enter-text">
-                        <div style={{ position: "relative", left: -translateValue * 10 }} id="display" className="display-text">
+                        <div style={{ position: "relative", left: -translateValue * 13 }} id="display" className="display-text">
                             {paragraph}
                         </div>
                     </div>
