@@ -1,6 +1,7 @@
 .card-container{
     width: 100%;
     height: 100vh;
+    // margin-top: 20vh;
     position: relative;
     top: 20vh;
 
@@ -8,6 +9,94 @@
 .card{
     width: 50vh;
     height: 50vh;
-    background-color: red;
     margin: 0 2vh;
+    background-color:teal;
+    // background-color: rgb(101, 95, 95);
+    color: white;
+    font-weight: bold;
+    
+    box-shadow: 1px 2px 5px 3px #2a2929;
+
+}
+.card h2{
+    width: 100%;
+    height:9vh;
+    display: grid;
+    place-items: center;
+
+    text-align: center;
+}
+.card p{
+    width: 100%;
+    text-align: center;
+}
+.card select{
+position: relative;
+color: black;
+width: 30vh;
+height: 5vh;
+margin-top: 7vh;
+border-radius: 1vh;
+outline: none;
+left: 50%;
+transform: translate(-50%);
+}
+.card .start_btn{
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 30vh;
+    justify-content: center;
+    border-radius: 0.4vh;
+    height: 6vh;
+    margin-top: 5vh;
+    left: 50%;
+transform: translate(-50%);
+background-color: orange;
+}
+.start_btn:hover{
+    outline: 2px solid rgb(191, 152, 79);
+}
+.voilet{
+    background-color: rgb(196, 68, 205);
+}
+
+//home section
+.home-section{
+    width: 100%;
+    height: 100vh;
+
+}
+.home-section .home-container{
+    width: 90%;
+    height: 100vh;
+    margin-top: 10vh;
+    background-color: red;
+    margin: 0 auto;
+
+}
+.home-container .test-detail-container{
+    width: 90%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: green;
+    margin: 0 auto;
+}
+.test-intro{
+    width: 100%;
+    height: 10vh;
+display: flex;
+align-items: center;
+font-size: 30px;
+justify-content: center;
+color: #2a2929;
+}
+.test-detail-container .test-detail-card{
+    width: 15vh;
+    height: 15vh;
+    border-radius: 50%;
+    background-color: blue;
 }
