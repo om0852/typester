@@ -10,7 +10,6 @@ export default function Page() {
     const [paragraph, setParagraph] = useState("");
     const [translateValue, setTranslateValue] = useState(0);
     const [textArray, setTextArray] = useState(["Certainly! Could you please provide more details about the topic or context of the demo text you'd like me to write? This information will help me tailor the text to your specific needs."]);
-
     let i = 0;
 
     function checkData(e) {
