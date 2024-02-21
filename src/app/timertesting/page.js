@@ -41,7 +41,7 @@ export default function Page() {
             if (i > 0) {
                 i--;
             }
-            arr1[i].style.color = "black";
+            arr1[i].style.color = "white";
             totalChars--; // Decrease total chars on backspace
         } else {
             if (j === 0) {
