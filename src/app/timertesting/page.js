@@ -3,15 +3,29 @@ import { useEffect, useState } from "react";
 import "../../../sass/component/home.scss";
 import Cookie from "js-cookie";
 
-// ... (import statements)
 
 export default function Page() {
-    const [incorrect, setincorrect] = useState(0);
+    const [incorrectWordCounter, setIncorrectWordCounter] = useState(0);
+    const [secondCounter, setSecondCounter] = useState(0);
+    const [incorrectCharCounter, setIncorrectCharCounter] = useState(0);
     const [paragraph, setParagraph] = useState("");
     const [translateValue, setTranslateValue] = useState(0);
     const [textArray, setTextArray] = useState(["Certainly! Could you please provide more details about the topic or context of the demo text you'd like me to write? This information will help me tailor the text to your specific needs."]);
-    let i = 0;
-
+    let i = 0, j = 0, flag = true;
+    const TimerCounter = () => {
+        setSecondCounter(prev => prev + 1)
+        j++
+        console.log(j)
+        if (j == 30) {
+            alert("time is over")
+            calculateWord();
+            calculateChar();
+            calculateAccurracy();
+        }
+        else {
+            setTimeout(TimerCounter, 1000)
+        }
+    }
     function checkData(e) {
         let arr1 = document.getElementsByTagName("span");
 
@@ -22,23 +36,60 @@ export default function Page() {
             if (i > 0) {
                 i--;
             }
-            arr1[i].style.background = "antiquewhite";
+            arr1[i].style.color = "black";
         } else {
-            console.log(i, arr1.length)
+            if (j == 0) {
+                TimerCounter()
+            }
+            // console.log(i, arr1.length)
             if (i < arr1.length) {
 
                 console.log(arr1[i].innerText, e.key)
                 if (arr1[i].innerText === e.key) {
+                    arr1[i].style.color = "green";
+
 
                 } else {
-                    arr1[i].style.background = "red";
+                    arr1[i].style.color = "red";
                 }
+
                 i++;
             }
+
         }
         setTranslateValue(i);
 
 
+    }
+    const calculateChar = () => {
+        let arr1 = document.getElementsByTagName("span");
+        let f = true;
+        let m = 0;
+        for (let k = 0; k < arr1.length; k++) {
+
+            if (arr1[k].style.color == "red" && arr1[k].innerText != " ") {
+                flag = false;
+                setIncorrectCharCounter(prev => prev + 1);
+            }
+        }
+    }
+    const calculateWord = () => {
+        let arr1 = document.getElementsByTagName("span");
+        let f = true;
+        let m = 0;
+        for (let k = 0; k < arr1.length; k++) {
+
+            if (arr1[k].style.color == "red" && arr1[k].innerText != " ") {
+                flag = false;
+            }
+            if (arr1[k].innerText == " ") {
+                if (flag == false) {
+                    flag = true;
+                    setIncorrectWordCounter(prev => prev + 1);
+                    console.log(incorrectWordCounter)
+                }
+            }
+        }
     }
     function load() {
         window.addEventListener('keydown', checkData)
@@ -60,15 +111,26 @@ export default function Page() {
     return (
         <div className="home-section">
             <div className="home-container">
-                {/* ... (other components) */}
-                <div className="show-text">
+                <div className="test-intro">Test Your Speed</div>
+                <div className="test-detail-container">
+                    <div className="test-detail-container-card">
+                        <div className="test-detail-card">{secondCounter}</div>Second
+                    </div>
+                    <div className="test-detail-container-card">
+                        <div className="test-detail-card">{incorrectWordCounter}</div>Words
+                    </div>
+                    <div className="test-detail-container-card">
+                        <div className="test-detail-card">{incorrectCharCounter}</div>Character
+                    </div>
+                </div>                <div className="show-text">
                     <div className="enter-text">
                         <div style={{ position: "relative", left: -translateValue * 13 }} id="display" className="display-text">
                             {paragraph}
                         </div>
+
                     </div>
                 </div>
-            </div>
+              </div>
         </div>
     )
 }
