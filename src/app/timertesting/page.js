@@ -19,8 +19,8 @@ export default function Page() {
     const TimerCounter = () => {
         setSecondCounter(prev => prev + 1)
         j++
-        console.log(j)
-        if (j === 30) {
+        // console.log(j)
+        if (j == parseInt(Cookie.get("timer"))) {
             alert("Time is over")
             calculateWord();
             calculateChar();

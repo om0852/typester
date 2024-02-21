@@ -1,13 +1,12 @@
 "use client";
 import "../../../sass/component/home.scss";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import AppContext from "../Context/store";
 import Cookie from "js-cookie"
 import Link from "next/link";
 export default function Home_Page() {
     const [bgColor, setbgColor] = useState("black");
     const [color, setColor] = useState("white");
-
     useEffect(() => {
         if (Cookie.get("bgColor") == "black") {
             setColor("white");
@@ -18,8 +17,10 @@ export default function Home_Page() {
             setbgColor("white");
 
         }
-    },[])
-
+    }, [])
+    const handleTime = (e) => {
+        Cookie.set('timer', e.target.value * 60, { expires: 1 })
+    }
     return (
         <div className="home-container" style={{ background: color }}>
 
@@ -28,12 +29,12 @@ export default function Home_Page() {
                 <div className="card">
                     <h2 className="title">TYPING SPEED TEST</h2>
                     <p>Test Your Typing Skill</p>
-                    <select>
-                        <option>1min</option>
-                        <option>2min</option>
-                        <option>5min</option>
-                        <option>10min</option>
-                        <option>20min</option>
+                    <select onChange={handleTime}>
+                        <option value={1}>1min</option>
+                        <option value={2}>2min</option>
+                        <option value={5}>5min</option>
+                        <option value={10}>10min</option>
+                        <option value={20}>20min</option>
                     </select>
 
                     <Link className="start_btn" href={"/timertesting"}>Start</Link>
