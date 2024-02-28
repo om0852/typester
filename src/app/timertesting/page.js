@@ -86,7 +86,7 @@ export default function Page() {
             if (arr1[k].style.color === "red" && arr1[k].innerText !== " ") {
                 flag = false;
             }
-            if (arr1[k].innerText === " ") {
+            if (arr1[k + 1].innerText === " ") {
                 if (flag === false) {
                     flag = true;
                     setIncorrectWordCounter(prev => prev + 1);
