@@ -32,7 +32,7 @@ export default function CircularLoader({ message }) {
                     </defs>
                     <circle strokeDashoffset={450 - (message.percentage * 4.3)} cx={"80"} cy={"80"} r={"70"} strokeLinecap="round" />
                 </svg>
-                <p>{message.num1} correct out of {message.num2}</p>
+                <p>{message.num1} {message.message} out of {message.num2}</p>
             </div>
 
         </>

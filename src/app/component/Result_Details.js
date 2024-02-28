@@ -12,10 +12,10 @@ export default function Result_Details({ result, setFlag }) {
         let totalWords = totalCorrectWordCounter + incorrectWordCounter;
 
         const newMessage = [
-            { num1: totalCorrectCharCounter, num2: totalChars, percentage: calculatePercentage(totalCorrectCharCounter, totalChars) },
-            { num1: incorrectCharCounter, num2: totalChars, percentage: calculatePercentage(incorrectCharCounter, totalChars) },
-            { num1: totalCorrectWordCounter, num2: totalWords, percentage: calculatePercentage(totalCorrectWordCounter, totalWords) },
-            { num1: incorrectWordCounter, num2: totalWords, percentage: calculatePercentage(incorrectWordCounter, totalWords) }
+            { num1: totalCorrectCharCounter, num2: totalChars, percentage: calculatePercentage(totalCorrectCharCounter, totalChars), message: "correct" },
+            { num1: incorrectCharCounter, num2: totalChars, percentage: calculatePercentage(incorrectCharCounter, totalChars), message: "incorrect" },
+            { num1: totalCorrectWordCounter, num2: totalWords, percentage: calculatePercentage(totalCorrectWordCounter, totalWords), message: "correct" },
+            { num1: incorrectWordCounter, num2: totalWords, percentage: calculatePercentage(incorrectWordCounter, totalWords), message: "incorrect" }
         ];
 
         setMessage(newMessage);

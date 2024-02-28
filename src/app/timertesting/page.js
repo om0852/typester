@@ -126,10 +126,10 @@ export default function Page() {
                         <div className="test-detail-card">{secondCounter}</div>Second{`(${Cookie.get("timer")})`}
                     </div>
                     <div className="test-detail-container-card">
-                        <div className="test-detail-card">{incorrectWordCounter}</div>Words
+                        <div className="test-detail-card">{incorrectWordCounter}</div>Incorrect Words
                     </div>
                     <div className="test-detail-container-card">
-                        <div className="test-detail-card">{incorrectCharCounter}</div>Character
+                        <div className="test-detail-card">{incorrectCharCounter}</div>Incorrect Character
                     </div>
                     <div className="test-detail-container-card">
                         <div className="test-detail-card">{accuracy}%</div>Accuracy
