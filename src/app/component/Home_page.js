@@ -1,13 +1,13 @@
 "use client";
 import "../../../sass/component/home.scss";
 import { useState, useEffect } from "react";
-import AppContext from "../Context/store";
 import Cookie from "js-cookie"
 import Link from "next/link";
 export default function Home_Page() {
     const [bgColor, setbgColor] = useState("black");
     const [color, setColor] = useState("white");
     useEffect(() => {
+        Cookie.set("timer", "60")
         if (Cookie.get("bgColor") == "black") {
             setColor("white");
             setbgColor("black");

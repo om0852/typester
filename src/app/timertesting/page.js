@@ -2,12 +2,18 @@
 import { useEffect, useState } from "react";
 import "../../../sass/component/home.scss";
 import Cookie from "js-cookie";
+import Result_Details from "../component/Result_Details";
 
 
 export default function Page() {
     const [incorrectWordCounter, setIncorrectWordCounter] = useState(0);
+    const [resultflag, setFlag] = useState(false);
+    let userMomentCounter = 0
     const [secondCounter, setSecondCounter] = useState(0);
+    const [resultDetails, setResultDetails] = useState(0);
     const [incorrectCharCounter, setIncorrectCharCounter] = useState(0);
+    const [totalCorrectWordCounter, setTotalCorrectWordCount] = useState(0);
+    const [totalCorrectCharCounter, setTotalCorrectCharCount] = useState(0);
     const [paragraph, setParagraph] = useState("");
     const [accuracy, setAccuracy] = useState(100); // Accuracy state
     const [translateValue, setTranslateValue] = useState(0);
@@ -20,11 +26,14 @@ export default function Page() {
         setSecondCounter(prev => prev + 1)
         j++
         // console.log(j)
-        if (j == parseInt(Cookie.get("timer"))) {
-            alert("Time is over")
+        if (j == 10) {
+            // if (j == parseInt(Cookie.get("timer"))) {
             calculateWord();
             calculateChar();
             calculateAccuracy();
+
+            setResultDetails()
+            setFlag(true);
         }
         else {
             setTimeout(TimerCounter, 1000)
@@ -40,9 +49,13 @@ export default function Page() {
             console.log(e.key)
             if (i > 0) {
                 i--;
+                userMomentCounter--;
+                totalChars--;
+
             }
             arr1[i].style.color = "white";
-            totalChars--; // Decrease total chars on backspace
+
+            // Decrease total chars on backspace
         } else {
             if (j === 0) {
                 TimerCounter()
@@ -59,7 +72,8 @@ export default function Page() {
                 }
 
                 i++;
-                totalChars++; // Increment total chars
+                totalChars++;
+                userMomentCounter++;
             }
 
         }
@@ -71,19 +85,24 @@ export default function Page() {
         let arr1 = document.getElementsByTagName("span");
         let f = true;
         let m = 0;
-        for (let k = 0; k < arr1.length; k++) {
+        for (let k = 0; k < userMomentCounter; k++) {
 
             if (arr1[k].style.color === "red" && arr1[k].innerText !== " ") {
                 flag = false;
                 setIncorrectCharCounter(prev => prev + 1);
             }
+            else {
+                setTotalCorrectCharCount(prev => prev + 1)
+            }
         }
+        console.log("total correct char" + totalCorrectCharCounter)
+
     }
     const calculateWord = () => {
         let arr1 = document.getElementsByTagName("span");
         let f = true;
         let m = 0;
-        for (let k = 0; k < arr1.length; k++) {
+        for (let k = 0; k < userMomentCounter; k++) {
 
             if (arr1[k].style.color === "red" && arr1[k].innerText !== " ") {
                 flag = false;
@@ -94,8 +113,12 @@ export default function Page() {
                     setIncorrectWordCounter(prev => prev + 1);
                     console.log(incorrectWordCounter)
                 }
+                else {
+                    setTotalCorrectWordCount(prev => prev + 1)
+                }
             }
         }
+        console.log("total correct word" + totalCorrectWordCounter)
     }
 
     // Calculate accuracy based on correctChars and totalChars
@@ -125,11 +148,14 @@ export default function Page() {
 
     return (
         <div className="home-section">
+            {resultflag && <Result_Details result={{
+                totalCorrectCharCounter, totalCorrectWordCounter, incorrectCharCounter, incorrectWordCounter, accuracy
+            }} />}
             <div className="home-container">
                 <div className="test-intro">Test Your Speed</div>
                 <div className="test-detail-container">
                     <div className="test-detail-container-card">
-                        <div className="test-detail-card">{secondCounter}</div>Second
+                        <div className="test-detail-card">{secondCounter}</div>Second{`(${Cookie.get("timer")})`}
                     </div>
                     <div className="test-detail-container-card">
                         <div className="test-detail-card">{incorrectWordCounter}</div>Words
@@ -150,6 +176,7 @@ export default function Page() {
                     </div>
                 </div>
             </div>
+            {totalCorrectCharCounter}word{totalCorrectWordCounter}
         </div>
     )
 }
