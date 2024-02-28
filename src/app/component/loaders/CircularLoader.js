@@ -20,7 +20,7 @@ export default function CircularLoader({ message }) {
             <div className="skill">
                 <div className="outer">
                     <div className="inner">
-                        <div id="number">{Math.round(message.percentage)}</div>
+                        <div id="number">{Math.round(message.percentage)}%</div>
                     </div>
                 </div>
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width={"160px"} height={"160px"}>
@@ -30,9 +30,9 @@ export default function CircularLoader({ message }) {
                             <stop offset={"100%"} stopColor="#h91e63" />
                         </linearGradient>
                     </defs>
-                    <circle strokeDashoffset={450 - message.percentage} cx={"80"} cy={"80"} r={"70"} strokeLinecap="round" />
+                    <circle strokeDashoffset={450 - (message.percentage * 4.3)} cx={"80"} cy={"80"} r={"70"} strokeLinecap="round" />
                 </svg>
-                {/* <p>{message}</p> */}
+                <p>{message.num1} correct out of {message.num2}</p>
             </div>
 
         </>

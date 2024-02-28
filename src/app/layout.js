@@ -11,7 +11,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <a href="https://icons8.com/icon/6483/multiply"></a>
       <body className={inter.className}>{children}</body>
     </html>
   );
