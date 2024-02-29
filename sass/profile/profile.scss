@@ -57,3 +57,29 @@ font-size: 3em;
     background-color: black;
     border-radius: 2vh;
 }
+.profile-result-container{
+    width: 100%;
+    height: 60%;
+    background-color: violet;
+}
+.result-card-container{
+    display: grid;
+    place-items: center;
+    place-content: center;
+    grid-template-columns: auto auto;
+}
+.result-title{
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    padding: 1vh 0;
+    font-size: 2em;
+}
+.result-card{
+    width: 20vh;
+    height: 20vh;
+    border-radius: 2vh;
+    text-align: center;
+    background-color: aqua;
+    margin: 2vh 2vh;
+}
