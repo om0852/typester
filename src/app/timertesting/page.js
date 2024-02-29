@@ -25,7 +25,7 @@ export default function Page() {
         setSecondCounter(prev => prev + 1);
         j++;
 
-        if (j === 10) {
+        if (j == Cookie.get("timer")) {
             calculateWord();
             calculateChar();
             calculateAccuracy();

@@ -1,0 +1,59 @@
+.main-profile-container{
+   width: 100%;
+   height: 100vh;//    background-color: aqua;
+}
+.main-profile-section{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.profile-details-container{
+    width: 40%;
+    height: 100%;
+    background-color: aqua;
+}
+.profile-result-container{
+    width: 60%;
+    
+    height: 100%;
+    background-color: red;
+}
+.profile-image{
+    width: 40vh;
+    height: 40%;
+    margin: 2vh auto;
+    background-color: black;
+    border-radius: 50%;
+}
+.profile-username{
+    width: 100%;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 2vh auto;
+font-size: 3em;
+}
+.profile-userfulllname{
+    text-align: center;
+    width: 100%;
+    margin: 2vh auto;
+    font-size: 1.3em;
+    height: auto;
+}
+.profile-level{
+    text-align: center;
+    width: 100%;
+    font-size: 2em;
+}
+.profile-editbutton{
+    width: 100%;
+    margin: auto;
+    display: grid;
+    place-items: center;
+}
+.profile-editbutton button{
+    width: 60%;
+    height: 7vh;
+    margin: 2vh auto;
+    background-color: black;
+    border-radius: 2vh;
+}
