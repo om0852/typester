@@ -2,20 +2,119 @@
 import "./login.css";
 import register from "../../images/login/register.svg";
 import log from "../../images/login/log.svg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useState } from "react";
 export default function Page() {
     const [newClass, setNewClass] = useState("");
+    const [data, setData] = useState({ email: "", password: "", userName: "" })
+    const handeChange = (e) => {
+        const { name, value } = e.target;
+        setData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    }
+    const handleOnLogin = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`http://localhost:3000/api/login`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ method: 2, email: data.email, password: data.password }),
+        });
+        const response = await res.json();
+        console.log(response)
+        responseChekcer(response)
+    }
+    const handleOnSignUp = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`http://localhost:3000/api/login`, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ method: 1, email: data.email, password: data.password }),
+        });
+        const response = await res.json();
+        responseChekcer(response)
+    }
+
+    const responseChekcer = (response) => {
+        if (response.status == 200) {
+            toast.success("Login Successsfully", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        else if (response.status == 201) {
+            toast.success("Account Created Successfully", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        else if (response.status == 302) {
+            toast.error("Account Already Exist", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        else if (response.status == 401) {
+            toast.error("Invalid Credintial", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+        else {
+            toast.error("Account doest Exist", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+        }
+
+    }
     return (
         <>
             <html lang="en">
                 <head>
-                    <meta charset="UTF-8" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <title>SignIn&SignUp</title>
-                    <link rel="stylesheet" type="text/css" href="./style.css" />
                     <script
                         src="https://kit.fontawesome.com/64d58efce2.js"
-                        crossorigin="anonymous"
+                        crossOrigin="anonymous"
                     ></script>
 
                 </head>
@@ -26,14 +125,14 @@ export default function Page() {
                                 <form action="" className="sign-in-form">
                                     <h2 className="title">Sign In</h2>
                                     <div className="input-field">
-                                        <i className="fas fa-user"></i>
-                                        <input type="text" placeholder="Username" />
+                                        <i className="fas fa-envelope"></i>
+                                        <input onChange={(e) => { handeChange(e) }} name="email" type="text" placeholder="Email" />
                                     </div>
                                     <div className="input-field">
                                         <i className="fas fa-lock"></i>
-                                        <input type="password" placeholder="Password" />
+                                        <input onChange={(e) => { handeChange(e) }} name="password" type="password" placeholder="Password" />
                                     </div>
-                                    <input type="submit" value="Login" className="btn solid" />
+                                    <input onClick={handleOnLogin} type="submit" value="Login" className="btn solid" />
 
                                     <p className="social-text">Or Sign in with social platforms</p>
                                     <div className="social-media">
@@ -57,17 +156,17 @@ export default function Page() {
                                     <h2 className="title">Sign Up</h2>
                                     <div className="input-field">
                                         <i className="fas fa-user"></i>
-                                        <input type="text" placeholder="Username" />
+                                        <input onChange={(e) => { handeChange(e) }} name="userName" type="text" placeholder="Username" />
                                     </div>
                                     <div className="input-field">
                                         <i className="fas fa-envelope"></i>
-                                        <input type="email" placeholder="Email" />
+                                        <input onChange={(e) => { handeChange(e) }} name="email" type="email" placeholder="Email" />
                                     </div>
                                     <div className="input-field">
                                         <i className="fas fa-lock"></i>
-                                        <input type="password" placeholder="Password" />
+                                        <input onChange={(e) => { handeChange(e) }} name="password" type="password" placeholder="Password" />
                                     </div>
-                                    <input type="submit" value="Sign Up" className="btn solid" />
+                                    <input onClick={handleOnSignUp} type="submit" value="Sign Up" className="btn solid" />
 
                                     <p className="social-text">Or Sign up with social platforms</p>
                                     <div className="social-media">

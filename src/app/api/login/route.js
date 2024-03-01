@@ -6,6 +6,7 @@ export async function POST(req, res) {
     try {
         const body = await req.json();
         const { method, email, password, userName } = body;
+        console.log(body)
         if (method == 1) {
             //checking there is already a user or not
             const Userdata = await User.findOne({ email });
