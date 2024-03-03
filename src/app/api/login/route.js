@@ -13,11 +13,12 @@ export async function POST(req, res) {
             console.log(Userdata)
             if (!Userdata) {
                 //if user not exist create a new account
-                await User.create({ email, userName, password })
+                const NewUser = await User.create({ email, userName, password })
                 return NextResponse.json(
                     {
                         status: 201,
-                        message: "Account Created Successfully"
+                        message: "Account Created Successfully",
+                        data: NewUser
                     }
                 );
             }
@@ -40,18 +41,18 @@ export async function POST(req, res) {
                 //if account exist check password
                 if (password == UserData.password) {
                     return NextResponse.json(
-                        { status: 200, message: "Login Successfully" }
+                        { status: 200, message: "Login Successfully", data: UserData }
                     );
                 }
                 else {
                     return NextResponse.json(
-                        { status: 401, message: "Invalid Password" }
+                        { status: 401, message: "Invalid Password", data: UserData }
                     );
                 }
             }
             else {
                 return NextResponse.json(
-                    { status: 404, message: "Account Doesn't Exist With This Emails" }
+                    { status: 404, message: "Account Doesn't Exist With This Emails", Data: UserData }
                 );
             }
         }

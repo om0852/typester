@@ -4,11 +4,15 @@ import Navbar from "./Navbar";
 
 import Home_Page from "./Home_page";
 import Cookie from "js-cookie"
+import userdetails from "../userdetails/userDetails";
 export default function Home() {
+
     const [bgColor, setbgColor] = useState("black");
     const [color, setColor] = useState("white");
 
     useEffect(() => {
+        // const data = await userdetails()
+        // alert(data._id)
         if (Cookie.get("bgColor") == "black") {
             setColor("white");
             setbgColor("black");

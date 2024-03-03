@@ -6,7 +6,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useState } from "react";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 export default function Page() {
+    const router = useRouter();
     const [newClass, setNewClass] = useState("");
     const [data, setData] = useState({ email: "", password: "", userName: "" })
     const handeChange = (e) => {
@@ -27,7 +30,6 @@ export default function Page() {
             body: JSON.stringify({ method: 2, email: data.email, password: data.password }),
         });
         const response = await res.json();
-        console.log(response)
         responseChekcer(response)
     }
     const handleOnSignUp = async (e) => {
@@ -56,6 +58,8 @@ export default function Page() {
                 progress: undefined,
                 theme: "colored",
             });
+            Cookies.set("id", response.data._id);
+            router.push("/")
         }
         else if (response.status == 201) {
             toast.success("Account Created Successfully", {
