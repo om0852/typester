@@ -5,15 +5,22 @@ import Cookie from "js-cookie"
 import Link from "next/link";
 import { io } from "socket.io-client";
 export default function Home_Page() {
-    const [socket, setSocket] = useState(0);
-    const handleSend = () => {
-    }
-    useEffect(() => {
-        const socket = io("http://localhost:3001")
-        setSocket(socket);
-        socket.emit("message", "omsalunke")
+    // /const [socket, setSocket] = useState(0);
+    // const socket = io("http://localhost:3002")
+    // const handleSend = () => {
+    //     // const socket = io("http://localhost:3002")
+    //     // setSocket(socket);
+    //     socket.emit("userid", Cookie.get("id"))
 
-        handleSend();
+    //     // setSocket(socket);
+
+    //     socket.emit("startMatch", Cookie.get("id"))
+
+    // }
+
+    useEffect(() => {
+
+        // handleSend();
     }, [])
     const [bgColor, setbgColor] = useState("black");
     const [color, setColor] = useState("white");

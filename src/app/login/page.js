@@ -4,14 +4,23 @@ import register from "../../images/login/register.svg";
 import log from "../../images/login/log.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { io } from "socket.io-client"
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 export default function Page() {
+
     const router = useRouter();
     const [newClass, setNewClass] = useState("");
     const [data, setData] = useState({ email: "", password: "", userName: "" })
+    const [socket, setSocket] = useState(0);
+    const handleSend = () => {
+
+        const socket = io("http://localhost:3002")
+        setSocket(socket);
+        socket.emit("userid", Cookies.get("id"))
+    }
+
     const handeChange = (e) => {
         const { name, value } = e.target;
         setData(prevData => ({
@@ -59,6 +68,7 @@ export default function Page() {
                 theme: "colored",
             });
             Cookies.set("id", response.data._id);
+            handleSend();
             router.push("/")
         }
         else if (response.status == 201) {

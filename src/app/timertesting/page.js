@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../../../sass/component/home.scss";
 import Cookie from "js-cookie";
 import Result_Details from "../component/Result_Details";
-
+import { io } from "socket.io-client"
 export default function Page() {
     const [incorrectWordCounter, setIncorrectWordCounter] = useState(0);
     const [resultflag, setFlag] = useState(false);
@@ -20,7 +20,30 @@ export default function Page() {
     let totalChars = 0; // Total characters typed
     let correctChars = 0; // Correct characters typed
     let i = 0, j = 0, flag = true;
+    const socket = io("http://localhost:3002")
+    const handleSend = () => {
+        console.log("welcome")
+        socket.emit("userid", Cookie.get("id"))
+        socket.emit("startMatch", Cookie.get("id"))
 
+    }
+
+const calledResult =(data)=>{
+    socket.emit("callResult", )
+
+}
+    useEffect(() => {
+        console.log("execeute")
+        socket.on("matchfound", (data) => {
+            alert(data.player1);
+        })
+    }, [socket])
+
+    const declareResult = () => {
+        socket.on("result", (data) => {
+            alert(data);
+        })
+    }
     const TimerCounter = () => {
         setSecondCounter(prev => prev + 1);
         j++;
@@ -110,6 +133,7 @@ export default function Page() {
 
     useEffect(() => {
         load();
+
         const spansArray = textArray[0].split('').map((char, index) => (
             <span key={index}>{char}</span>
         ));
@@ -117,9 +141,10 @@ export default function Page() {
     }, [textArray]);
 
     return (
-        <div className="home-section">
+        <div className="home-section"  >
             {resultflag && <Result_Details result={{ totalCorrectCharCounter, totalCorrectWordCounter, incorrectCharCounter, incorrectWordCounter, accuracy }} setFlag={setFlag} />}
             <div className="home-container">
+                <button onClick={handleSend}>ready</button>
                 <div className="test-intro">Test Your Speed</div>
                 <div className="test-detail-container">
                     <div className="test-detail-container-card">
